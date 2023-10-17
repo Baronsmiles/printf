@@ -32,8 +32,8 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i + 1] == 's')
 		{
-			int s_count= _putss(va_arg(list_of_args, char *));
-			i++;
+			int s_count = _putss(va_arg(list_of_args, char *));
+				i++;
 			count += (s_count - 1);
 		}
 		else if (format[i + 1] == '%')
@@ -43,5 +43,7 @@ int _printf(const char *format, ...)
 		count += 1;
 	}
 	va_end(list_of_args);
-	return count;
+	{
+	return (count);
+	}
 }
