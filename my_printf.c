@@ -1,25 +1,25 @@
-#include "main.h"
 #include <stdarg.h>
+#include "main.h"
 
 /**
- * _printf - print to stdoutput format...
+ * _printf - Custom printf function that prints formatted output.
+ * @format: Format string containing format specifiers.
  *
- * @format: format specifier
- *Return: number of byte printed
+ * Return: Number of characters printed (excluding null byte).
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i, count = 0;
+	va_list args;
+	unsigned int i;
+	unsigned int s_count;
+	unsigned int count = 0;
 
-	va_list list_of_args;
+	va_start(args, format);
 
 	if (!format || (format[0] == '%' && format[1] == '\0'))
-	{
 		return (1);
-	}
-	va_start(list_of_args, format);
 
-	for (i = 0; (format[i]); i++)
+	for (i = 0; format[i]; i++)
 	{
 		if (format[i] != '%')
 		{
@@ -27,23 +27,26 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			_putchar(va_arg(list_of_args, int));
-			count++;
+			char c = (char)va_arg(args, int);
+
+			_putchar(c);
+			i++;
 		}
 		else if (format[i + 1] == 's')
 		{
-			int s_count = _putss(va_arg(list_of_args, char *));
-				i++;
+			const char *str = va_arg(args, const char*);
+
+			s_count = _putss(str);
+			i++;
 			count += (s_count - 1);
 		}
 		else if (format[i + 1] == '%')
 		{
 			_putchar('%');
+			i++;
 		}
-		count += 1;
+		count++;
 	}
-	va_end(list_of_args);
-	{
+	va_end(args);
 	return (count);
-	}
 }

@@ -6,7 +6,7 @@
  * @a: string
  * Return: number of byte
  */
-int _putss(char *a)
+int _putss(const char *a)
 {
 	int count = 0;
 

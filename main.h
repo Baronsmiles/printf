@@ -7,6 +7,6 @@
 
 int _putchar(char a);
 int _printf(const char *format, ...);
-int _putss(char *a);
+int _putss(const char *a);
 
 #endif
